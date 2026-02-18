@@ -3,65 +3,49 @@
 AI-assisted development tooling for **Xperience by Kentico** projects, powered by **Claude Code**.
 
 Includes:
+
 - MCP servers for Kentico documentation and content modeling
 - Custom slash commands for Page Builder widget creation (research + implementation)
 - Page Builder rules, documentation links, and widget examples for Claude context
-- A bootstrap command that auto-generates a tailored `CLAUDE.md` for any XbyK project
+- A bootstrap command (`/init-kentico`) that auto-generates a tailored `CLAUDE.md` for any XbyK project
 
 ---
 
-## Quick Install (one file)
+## Install
 
-This is the easiest way. Copy a single file, run one command, everything is scaffolded automatically.
+### Option 1: ai4dev (recommended)
 
-**1. Copy the bootstrap command to your project:**
+[ai4dev](https://github.com/SimpleA/ai4dev) is a CLI tool for distributing AI tooling packages. It copies all files to your project in one command.
 
-```
-files/.claude/commands/init-kentico.md  →  <your-project>/.claude/commands/init-kentico.md
-```
-
-**2. Open Claude Code in VS Code (or run `claude` in the terminal) at your project root.**
-
-**3. Run:**
-
-```
-/init-kentico
+```bash
+ai4dev install kentico
 ```
 
-Claude Code will:
-- Scan your project structure (`Program.cs`, `.csproj`, channels, etc.)
-- Generate a tailored `CLAUDE.md` for your project
-- Write `.mcp.json` with the Kentico MCP servers
-- Create all supporting commands, instructions, and templates
-- Update `.claude/settings.local.json` with the required permissions
+Then run `/init-kentico` in Claude Code to generate your project's `CLAUDE.md`.
 
-**4. Reload Claude Code** (close and reopen, or run `/mcp` to verify servers connected).
+### Option 2: Manual
 
----
-
-## Manual Install (all files)
-
-If you prefer to copy everything yourself and only need the `CLAUDE.md` generated:
-
-**1. Copy the contents of `files/` to your project root:**
+Copy the contents of `files/` to your project root:
 
 ```
 files/
-  .mcp.json                              →  <project>/.mcp.json
-  .claude/commands/init-kentico.md       →  <project>/.claude/commands/init-kentico.md
-  .claude/commands/widget-create-research.md
-  .claude/commands/widget-create-implementation.md
-  .claude/instructions/base-pagebuilder.md
-  .claude/instructions/docs.md
-  .claude/instructions/example-widgets.md
-  .claude/create-instructions/CREATION_TEMPLATE.md
+  .mcp.json                                        →  <project>/.mcp.json
+  .claude/commands/init-kentico.md                 →  <project>/.claude/commands/
+  .claude/commands/widget-create-research.md       →  <project>/.claude/commands/
+  .claude/commands/widget-create-implementation.md →  <project>/.claude/commands/
+  .claude/instructions/base-pagebuilder.md         →  <project>/.claude/instructions/
+  .claude/instructions/docs.md                     →  <project>/.claude/instructions/
+  .claude/instructions/example-widgets.md          →  <project>/.claude/instructions/
+  .claude/create-instructions/CREATION_TEMPLATE.md →  <project>/.claude/create-instructions/
 ```
 
-**2. Run `/init-kentico`** to generate the project-specific `CLAUDE.md`.
+Then run `/init-kentico` in Claude Code to generate your project's `CLAUDE.md`.
 
-Or write `CLAUDE.md` manually — see [CLAUDE.md template structure](#claudemd-structure) below.
+---
 
-**3. Update `.claude/settings.local.json`** to allow MCP tools without prompting:
+## After Installing
+
+**1. Add MCP permissions** to `.claude/settings.local.json` so Claude Code can use the Kentico MCP servers without prompting:
 
 ```json
 {
@@ -73,6 +57,10 @@ Or write `CLAUDE.md` manually — see [CLAUDE.md template structure](#claudemd-s
   }
 }
 ```
+
+**2. Run `/init-kentico`** in Claude Code. It scans your project and writes a tailored `CLAUDE.md`. That's all it does — the rest of the files are already in place from the install step.
+
+**3. Reload Claude Code** (close and reopen, or run `/mcp` to verify servers connected).
 
 ---
 
@@ -89,7 +77,7 @@ Or write `CLAUDE.md` manually — see [CLAUDE.md template structure](#claudemd-s
 
 | Command | Usage | Description |
 | ------- | ----- | ----------- |
-| `/init-kentico` | `/init-kentico` | Bootstrap: scan project, generate CLAUDE.md, scaffold all files |
+| `/init-kentico` | `/init-kentico` | Scan project and generate a tailored `CLAUDE.md` |
 | `/widget-create-research` | `/widget-create-research ./my-widget/` | Research stage: reads docs + project, fills in creation template |
 | `/widget-create-implementation` | `/widget-create-implementation ./my-widget/instructions.md` | Implementation stage: builds the widget from the filled template |
 
@@ -113,11 +101,9 @@ Ask Claude to **"start content modeling"** — it invokes the `kentico-cm-mcp` s
 
 ---
 
-## CLAUDE.md Structure
+## CLAUDE.md
 
-The `CLAUDE.md` at the project root is the main instruction file Claude Code reads automatically. It is **project-specific** and not included as a static file — `/init-kentico` generates it by scanning your project.
-
-It should contain: project overview, architecture tree, build commands, key patterns, coding conventions, Kentico version, and MCP server references.
+The `CLAUDE.md` at the project root is the main instruction file Claude Code reads automatically. It is **project-specific** and not included as a static file — `/init-kentico` generates it by scanning your project structure, `.csproj` files, `Program.cs`, and channel folders.
 
 ---
 
