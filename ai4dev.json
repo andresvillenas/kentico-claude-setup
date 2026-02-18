@@ -1,0 +1,14 @@
+{
+  "name": "kentico",
+  "version": "1.0.0",
+  "description": "AI tooling for Xperience by Kentico projects — Claude Code commands, MCP servers, and Page Builder widget workflow.",
+  "files": [
+    { "src": "files/.mcp.json", "dest": ".mcp.json" },
+    { "src": "files/.claude/commands/", "dest": ".claude/commands/" },
+    { "src": "files/.claude/instructions/", "dest": ".claude/instructions/" },
+    { "src": "files/.claude/create-instructions/", "dest": ".claude/create-instructions/" }
+  ],
+  "postInstall": {
+    "message": "Run /init-kentico in Claude Code to generate your project's CLAUDE.md"
+  }
+}
