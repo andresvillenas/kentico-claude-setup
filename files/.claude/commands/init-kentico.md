@@ -3,6 +3,8 @@ description: "Bootstrap Kentico AI tooling for an Xperience by Kentico project. 
 allowed-tools: Bash, Glob, Grep, Read, Write, Edit, TodoWrite, mcp__kentico-docs__*, mcp__kentico-cm__*
 ---
 
+# Document Heading
+
 ## Initialize Kentico AI Tooling
 
 You are setting up AI-assisted development for an **Xperience by Kentico** project. Follow these steps carefully and in order.
@@ -36,6 +38,7 @@ Read the following to understand the project:
 6. Check for test project
 
 Collect the following facts:
+
 - **Solution name** and **web project name**
 - **Kentico Xperience version** (from package reference)
 - **Target framework** (net10.0, net9.0, etc.)
@@ -496,18 +499,22 @@ If the file exists and already has a `permissions.allow` array, add the two MCP 
 ### Step 7: Report
 
 Tell the user:
+
 1. Which files were created
 2. Whether this was detected as an existing project or a new/empty one
 3. If existing: key facts discovered (Kentico version, channels, content types, notable packages)
 4. If new/empty: remind them to update `CLAUDE.md` placeholders as they build out the project
 
 **Next steps (always include):**
+
 - Reload Claude Code to activate the MCP servers
 - To design a content model before writing code: ask Claude to "start content modeling" (uses kentico-cm-mcp)
 
 **Next steps (existing projects only):**
+
 - To create a widget: prepare a folder with `requirements.md`, then run `/widget-create-research [folder-path]`
 
 **Next steps (new/empty projects only):**
+
 - Scaffold the project: `dotnet new` or follow the Kentico setup guide
 - Once scaffolded, run `/init-kentico` again to regenerate `CLAUDE.md` with real project details
